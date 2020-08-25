@@ -95,7 +95,7 @@ func (driver *stdoutStorage) containerFsStatsToValues(series *map[string]uint64,
 	}
 }
 
-func (driver *stdoutStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (driver *stdoutStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}

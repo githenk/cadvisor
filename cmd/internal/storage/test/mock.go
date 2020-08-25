@@ -25,7 +25,7 @@ type MockStorageDriver struct {
 	MockCloseMethod bool
 }
 
-func (d *MockStorageDriver) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (d *MockStorageDriver) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	args := d.Called(cInfo.ContainerReference, stats)
 	return args.Error(0)
 }

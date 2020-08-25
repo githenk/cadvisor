@@ -19,4 +19,4 @@ set -x
 
 make build
 
-docker build -t google/cadvisor:beta -f $(dirname $0)/Dockerfile .
+docker build -t google/githenk-cadvisor:experiment -f $(dirname $0)/Dockerfile .

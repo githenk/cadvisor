@@ -79,7 +79,7 @@ func (s *kafkaStorage) infoToDetailSpec(cInfo *info.ContainerInfo, stats *info.C
 	return detail
 }
 
-func (s *kafkaStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *kafkaStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	detail := s.infoToDetailSpec(cInfo, stats)
 	b, err := json.Marshal(detail)
 

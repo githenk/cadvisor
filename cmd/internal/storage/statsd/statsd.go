@@ -115,7 +115,7 @@ func (s *statsdStorage) containerFsStatsToValues(
 }
 
 // Push the data into redis
-func (s *statsdStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *statsdStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}
@@ -130,7 +130,7 @@ func (s *statsdStorage) AddStats(cInfo *info.ContainerInfo, stats *info.Containe
 	series := s.containerStatsToValues(stats)
 	s.containerFsStatsToValues(&series, stats)
 	for key, value := range series {
-		err := s.client.Send(s.Namespace, containerName, key, value)
+		err := s.client.Send(machineInfo.MachineID, containerName, key, value)
 		if err != nil {
 			return err
 		}

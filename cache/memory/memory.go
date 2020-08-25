@@ -73,7 +73,7 @@ type InMemoryCache struct {
 	backend           []storage.StorageDriver
 }
 
-func (c *InMemoryCache) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (c *InMemoryCache) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	var cstore *containerCache
 	var ok bool
 
@@ -90,7 +90,7 @@ func (c *InMemoryCache) AddStats(cInfo *info.ContainerInfo, stats *info.Containe
 		// TODO(monnand): To deal with long delay write operations, we
 		// may want to start a pool of goroutines to do write
 		// operations.
-		if err := backend.AddStats(cInfo, stats); err != nil {
+		if err := backend.AddStats(cInfo, stats, machineInfo); err != nil {
 			klog.Error(err)
 		}
 	}

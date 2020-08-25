@@ -263,7 +263,7 @@ func (s *bigqueryStorage) containerFilesystemStatsToRows(
 	return rows
 }
 
-func (s *bigqueryStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *bigqueryStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}

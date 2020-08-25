@@ -85,7 +85,7 @@ func (s *elasticStorage) containerStatsAndDefaultValues(
 	return detail
 }
 
-func (s *elasticStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *elasticStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}

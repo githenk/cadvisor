@@ -60,6 +60,7 @@ type containerInfo struct {
 type containerData struct {
 	handler                  container.ContainerHandler
 	info                     containerInfo
+	machineInfo              *info.MachineInfo
 	memoryCache              *memory.InMemoryCache
 	lock                     sync.Mutex
 	loadReader               cpuload.CpuLoadReader
@@ -383,7 +384,7 @@ func (cd *containerData) GetProcessList(cadvisorContainer string, inHostNamespac
 	return processes, nil
 }
 
-func newContainerData(containerName string, memoryCache *memory.InMemoryCache, handler container.ContainerHandler, logUsage bool, collectorManager collector.CollectorManager, maxHousekeepingInterval time.Duration, allowDynamicHousekeeping bool, clock clock.Clock) (*containerData, error) {
+func newContainerData(containerName string, memoryCache *memory.InMemoryCache, handler container.ContainerHandler, logUsage bool, collectorManager collector.CollectorManager, maxHousekeepingInterval time.Duration, allowDynamicHousekeeping bool, clock clock.Clock, machineInfo *info.MachineInfo) (*containerData, error) {
 	if memoryCache == nil {
 		return nil, fmt.Errorf("nil memory storage")
 	}
@@ -397,6 +398,7 @@ func newContainerData(containerName string, memoryCache *memory.InMemoryCache, h
 
 	cont := &containerData{
 		handler:                  handler,
+		machineInfo:              machineInfo,
 		memoryCache:              memoryCache,
 		housekeepingInterval:     *HousekeepingInterval,
 		maxHousekeepingInterval:  maxHousekeepingInterval,
@@ -666,7 +668,7 @@ func (cd *containerData) updateStats() error {
 		ContainerReference: ref,
 	}
 
-	err = cd.memoryCache.AddStats(&cInfo, stats)
+	err = cd.memoryCache.AddStats(&cInfo, stats, cd.machineInfo)
 	if err != nil {
 		return err
 	}

@@ -83,7 +83,7 @@ func (s *redisStorage) containerStatsAndDefaultValues(cInfo *info.ContainerInfo,
 }
 
 // Push the data into redis
-func (s *redisStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *redisStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}

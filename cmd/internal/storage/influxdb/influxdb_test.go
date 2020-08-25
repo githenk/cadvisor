@@ -47,7 +47,7 @@ func (self *influxDbTestStorageDriver) readyToFlush() bool {
 	return self.count >= self.buffer
 }
 
-func (self *influxDbTestStorageDriver) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (self *influxDbTestStorageDriver) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	self.count++
 	return self.base.AddStats(cInfo, stats)
 }

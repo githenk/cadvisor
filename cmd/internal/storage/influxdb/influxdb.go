@@ -383,7 +383,7 @@ func (s *influxdbStorage) defaultReadyToFlush() bool {
 	return time.Since(s.lastWrite) >= s.bufferDuration
 }
 
-func (s *influxdbStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats) error {
+func (s *influxdbStorage) AddStats(cInfo *info.ContainerInfo, stats *info.ContainerStats, machineInfo *info.MachineInfo) error {
 	if stats == nil {
 		return nil
 	}
